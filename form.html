@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#050505">
+<title>Form Pendaftaran — KAI Pesta LeLARlian 2026</title>
+<style>
+:root{--black:#050505;--ink:#151e2d;--muted:#718096;--line:#e7edf3;--blue:#2785f7;--bg:#f7f9fc;--green:#16a36a;--danger:#d83b48}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body.locked{overflow:hidden}
+a{color:inherit}
+.topbar{height:76px;background:#000;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(20px,calc((100vw - 900px)/2));border-bottom:2px solid #e2e8f0}
+.brand{font-size:25px;font-weight:900;letter-spacing:-3px;color:#fff;text-decoration:none}
+.lang-login{display:flex;gap:12px;align-items:center}
+.language{display:flex;gap:8px;align-items:center;border:1px solid #292929;border-radius:10px;padding:9px 12px;color:#c7ed28;font-weight:800;font-size:13px}
+.language .en{color:#606060}
+.login{background:var(--blue);color:white;text-decoration:none;border-radius:10px;padding:12px 20px;font-weight:800;font-size:13px;letter-spacing:2px}
+.container{width:min(100% - 28px,820px);margin:0 auto;padding:28px 0 44px}
+.page-heading{text-align:center;margin:6px auto 22px}
+.page-heading .eyebrow{color:#8793a3;text-transform:uppercase;letter-spacing:3px;font-size:10px;font-weight:800}
+.page-heading h1{font-size:clamp(23px,4vw,34px);margin:8px 0 7px;line-height:1.2}
+.page-heading p{color:var(--muted);font-size:13px;margin:0}
+.timer{margin:18px auto 22px;width:max-content;max-width:100%;display:flex;align-items:center;gap:10px;padding:10px 17px;border:1px solid #dce7f7;border-radius:999px;background:#edf5ff;color:#27558a;font-weight:750;font-size:14px}
+.timer svg{width:18px;height:18px;stroke:currentColor}
+.timer strong{font-variant-numeric:tabular-nums;letter-spacing:1px}
+.timer.warning{background:#fff1f0;color:#bd2634;border-color:#ffd2d5}
+.progress-wrap{margin:0 0 18px}
+.progress-labels{display:flex;justify-content:space-between;gap:8px;margin-bottom:9px;color:#8994a3;font-size:11px;font-weight:700}
+.progress-labels span.active{color:#1673dc}
+.progress-track{height:5px;background:#e5eaf1;border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:33.333%;background:linear-gradient(90deg,#2187fa,#53b5ff);border-radius:99px;transition:width .25s}
+.card{background:#fff;border:1px solid #e9eef4;border-radius:22px;box-shadow:0 3px 8px #1422380c,0 1px 2px #1422380a;overflow:hidden}
+.card-head{padding:22px 24px;border-bottom:1px solid #edf1f6;background:#fcfdff}
+.card-head h2{font-size:19px;margin:0 0 5px;display:flex;align-items:center;gap:10px}
+.card-head h2 .number{width:30px;height:30px;display:grid;place-items:center;background:#eaf3ff;color:#1876df;border-radius:9px;font-size:13px}
+.card-head p{margin:0;color:#8591a1;font-size:12px;line-height:1.5}
+.card-body{padding:24px}
+.form-page{display:none}
+.form-page.active{display:block;animation:fadeIn .22s ease}
+@keyframes fadeIn{from{opacity:.35;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.field{min-width:0}
+.field.full{grid-column:1/-1}
+label,.field-label{display:block;font-size:12px;font-weight:750;color:#293548;margin-bottom:8px}
+.required{color:#e14b57}
+input,select,textarea{display:block;width:100%;min-height:46px;border:1px solid #dce3ec;border-radius:11px;background:#fff;padding:12px 13px;color:#1e293b;font:inherit;font-size:13px;outline:none;transition:border-color .15s,box-shadow .15s}
+input:focus,select:focus,textarea:focus{border-color:#66a7fb;box-shadow:0 0 0 3px #2785f71c}
+input::placeholder,textarea::placeholder{color:#a3adba}
+textarea{resize:vertical;min-height:88px}
+.hint{font-size:10px;color:#8995a4;line-height:1.5;margin:7px 0 0}
+.choice-row{display:flex;gap:10px;flex-wrap:wrap}
+.choice{display:flex;align-items:center;gap:8px;border:1px solid #dce3ec;border-radius:10px;padding:12px 14px;min-height:44px;font-size:12px;font-weight:600;cursor:pointer}
+.choice input{width:16px;min-height:16px;height:16px;margin:0;accent-color:#2584f5}
+.sizechart{width:100%;display:block;margin:0 auto 18px;border:1px solid #e6ebf1;border-radius:12px;overflow:hidden;background:#f8fafc}
+.sizechart summary{padding:12px 14px;font-size:12px;font-weight:750;cursor:pointer;color:#34445b}
+.sizechart-content{padding:0 14px 14px}
+.size-table{width:100%;border-collapse:collapse;font-size:11px;text-align:center}
+.size-table th,.size-table td{border:1px solid #e2e8f0;padding:9px 6px}
+.size-table th{background:#edf4fd}
+.notice{padding:12px 14px;border-radius:11px;background:#f1f7ff;border:1px solid #dcecff;color:#526a87;font-size:11px;line-height:1.55;margin:0 0 18px}
+.summary-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}
+.summary-entry{padding:12px 0;border-bottom:1px solid #edf1f5;min-width:0}
+.summary-entry .key{font-size:10px;color:#8995a4;margin-bottom:5px}
+.summary-entry .val{font-size:12px;font-weight:650;overflow-wrap:anywhere;white-space:pre-wrap}
+.summary-entry.full{grid-column:1/-1}
+.payment-box{margin-top:22px;padding:18px;border:1px solid #e5ebf3;border-radius:16px;background:#fbfcfe}
+.payment-box h3{font-size:15px;margin:0 0 6px}
+.payment-box p{font-size:11px;line-height:1.6;color:#7a8798;margin:0 0 14px}
+.qris-image{display:block;width:min(100%,280px);aspect-ratio:1/1;object-fit:contain;margin:0 auto 14px;border:1px dashed #cbd5e1;border-radius:14px;background:#fff}
+.total-box{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#071629;color:#fff;border-radius:14px;padding:17px 18px;margin:18px 0}
+.total-box span{font-size:12px;color:#c2cfde}.total-box strong{font-size:22px;white-space:nowrap}
+.upload{display:block;border:1.5px dashed #c6d4e5;border-radius:14px;padding:18px;background:#fbfdff;text-align:center;cursor:pointer}
+.upload input{border:0;padding:8px 0 0;min-height:auto;font-size:11px}
+.upload strong{display:block;font-size:12px;margin-bottom:5px}
+.upload small{display:block;color:#8592a3;font-size:10px;line-height:1.5}
+.file-name{font-size:11px;color:#17804d;margin-top:9px;overflow-wrap:anywhere}
+.consent{display:flex;gap:11px;align-items:flex-start;margin-top:18px;padding:15px;border:1px solid #e1e8f0;border-radius:12px;background:#fbfcfe}
+.consent input{width:18px;height:18px;min-height:18px;flex-shrink:0;margin:1px 0 0;accent-color:#1680f5}
+.consent label{font-size:11px;font-weight:500;line-height:1.65;margin:0;color:#536174}
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.btn{min-height:48px;border:0;border-radius:11px;padding:13px 20px;font-size:13px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:9px}
+.btn-secondary{background:#eef2f7;color:#435168}
+.btn-primary{background:#050505;color:#fff;box-shadow:0 4px 9px #0002;flex:1}
+.btn-primary:disabled{background:#e9eef5;color:#aab6c6;box-shadow:none;cursor:not-allowed}
+.btn svg{width:17px;height:17px;stroke:currentColor}
+.footer{background:radial-gradient(ellipse at 25% 50%,#0a4540 0%,transparent 44%),linear-gradient(135deg,#05080b,#0b1519 60%,#020403);color:#9ba8aa;padding:32px 20px 28px}
+.footer-inner{max-width:820px;margin:auto}
+.footer-brand{color:#f6f8f9;font-size:17px;letter-spacing:4px;font-weight:800;margin-bottom:12px}
+.footer-brand span{letter-spacing:-2px;margin-right:10px}
+.footer p{max-width:470px;font-size:11px;line-height:1.7;color:#8a9699}
+.footer-links{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px}
+.footer-links a{font-size:10px;color:#a8b2b5;text-decoration:none}
+.copyright{font-size:10px;color:#667174;border-top:1px solid #ffffff15;padding-top:18px;margin-top:24px;text-align:center}
+.loading-screen{position:fixed;inset:0;z-index:9999;background:radial-gradient(ellipse at 50% 35%,#102d3b 0%,#07111c 48%,#020508 100%);color:#fff;display:none;align-items:center;justify-content:center;padding:24px;text-align:center}
+.loading-screen.show{display:flex}
+.loading-content{width:min(100%,390px)}
+.loading-logo{font-size:22px;font-weight:900;letter-spacing:5px;margin-bottom:34px}
+.spinner-wrap{width:94px;height:94px;margin:0 auto 28px;position:relative;display:grid;place-items:center}
+.spinner{width:88px;height:88px;border-radius:50%;border:3px solid #ffffff16;border-top-color:#55b8ff;border-right-color:#2785f7;animation:spin 1s linear infinite}
+.spinner-core{position:absolute;width:48px;height:48px;border:1px solid #5cb7ff66;border-radius:15px;transform:rotate(45deg);animation:pulse 1.7s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{0%,100%{transform:rotate(45deg) scale(.82);opacity:.45}50%{transform:rotate(135deg) scale(1.08);opacity:1}}
+.loading-content h2{font-size:23px;margin:0 0 10px}
+.loading-content p{font-size:12px;line-height:1.7;color:#aab9c7;margin:0 auto 24px;max-width:320px}
+.loading-track{height:5px;background:#ffffff18;border-radius:99px;overflow:hidden}
+.loading-progress{height:100%;width:0;background:linear-gradient(90deg,#2785f7,#71d5ff);border-radius:99px;transition:width .3s linear}
+.loading-status{display:flex;justify-content:space-between;font-size:10px;color:#8b9dad;margin-top:10px}
+.loading-note{font-size:10px;color:#738597;margin-top:25px}
+@media(max-width:560px){
+ .topbar{height:64px;padding:0 16px}.brand{font-size:22px}.language{padding:7px 9px;font-size:11px;gap:5px}.login{padding:10px 13px;font-size:11px;letter-spacing:1px}
+ .container{width:calc(100% - 24px);padding:22px 0 32px}.page-heading h1{font-size:25px}.card{border-radius:17px}.card-head{padding:18px}.card-body{padding:18px}.grid{grid-template-columns:1fr;gap:15px}.field.full{grid-column:auto}
+ .progress-labels{font-size:9px}.summary-list{grid-template-columns:1fr}.summary-entry.full{grid-column:auto}.actions{gap:9px}.btn{padding:12px 14px;font-size:12px}
+ .total-box strong{font-size:19px}.footer{padding:28px 18px}.footer-brand{font-size:15px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="Nexuratix">N×</a>
+  <div class="lang-login">
+    <div class="language" aria-label="Bahasa"><span>🇮🇩</span><span>ID</span><span style="color:#666">/</span><span>🇬🇧</span><span class="en">EN</span></div>
+    <a class="login" href="#" onclick="return false;">MASUK</a>
+  </div>
+</header>
+
+<main class="container">
+  <div class="page-heading">
+    <div class="eyebrow">Nexuratix • Registrasi Peserta</div>
+    <h1>Formulir Pendaftaran</h1>
+    <p>KAI Pesta LeLARlian 2026 · Minggu, 29 November 2026</p>
+    <div class="timer" id="timerBox">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <span>Selesaikan pendaftaran dalam</span><strong id="timer">05:00</strong>
+    </div>
+  </div>
+
+  <div class="progress-wrap" aria-label="Progres formulir">
+    <div class="progress-labels"><span class="active" id="stepLabel1">1. Data Peserta</span><span id="stepLabel2">2. Detail Peserta</span><span id="stepLabel3">3. Pembayaran</span></div>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <form id="registrationForm" novalidate>
+    <!-- HALAMAN 1 -->
+    <section class="card form-page active" data-page="1">
+      <div class="card-head"><h2><span class="number">01</span> Data Pribadi</h2><p>Isi data sesuai identitas resmi yang berlaku. Kolom bertanda * wajib diisi.</p></div>
+      <div class="card-body">
+        <div class="grid">
+          <div class="field full"><label for="fullName">Nama Lengkap <span class="required">*</span></label><input id="fullName" name="fullName" autocomplete="name" placeholder="Masukkan nama lengkap" required></div>
+          <div class="field"><label for="birthPlace">Tempat Lahir <span class="required">*</span></label><input id="birthPlace" name="birthPlace" placeholder="Contoh: Cirebon" required></div>
+          <div class="field"><label for="birthDate">Tanggal Lahir <span class="required">*</span></label><input id="birthDate" name="birthDate" type="date" required></div>
+          <div class="field"><span class="field-label">Jenis Kelamin <span class="required">*</span></span><div class="choice-row">
+            <label class="choice"><input type="radio" name="gender" value="Laki-laki" required> Laki-laki</label>
+            <label class="choice"><input type="radio" name="gender" value="Perempuan" required> Perempuan</label>
+          </div></div>
+          <div class="field"><label for="identityType">Jenis Identitas <span class="required">*</span></label><select id="identityType" name="identityType" required><option value="">Pilih jenis identitas</option><option>KTP</option><option>SIM</option><option>Paspor</option><option>Kartu Pelajar</option><option>Lainnya</option></select></div>
+          <div class="field full"><label for="identityNumber">Nomor Identitas <span class="required">*</span></label><input id="identityNumber" name="identityNumber" autocomplete="off" placeholder="Masukkan nomor identitas" required><p class="hint">Gunakan nomor identitas milik Anda sendiri. Data ini sebaiknya diproses melalui sistem pendaftaran yang aman.</p></div>
+          <div class="field"><label for="whatsapp">No. WhatsApp Aktif <span class="required">*</span></label><input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="Contoh: 08xxxxxxxxxx" required></div>
+          <div class="field"><label for="email">Email Aktif <span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="nama@email.com" required></div>
+          <div class="field full"><label for="address">Alamat / Domisili <span class="required">*</span></label><textarea id="address" name="address" autocomplete="street-address" placeholder="Masukkan alamat atau domisili lengkap" required></textarea></div>
+        </div>
+        <div class="actions"><a class="btn btn-secondary" href="tiket.html">Kembali</a><button class="btn btn-primary" type="button" data-next>Lanjut ke Detail <span>→</span></button></div>
+      </div>
+    </section>
+
+    <!-- HALAMAN 2 -->
+    <section class="card form-page" data-page="2">
+      <div class="card-head"><h2><span class="number">02</span> Detail Peserta</h2><p>Lengkapi informasi jersey, kontak darurat, dan informasi kesehatan yang diperlukan untuk keselamatan acara.</p></div>
+      <div class="card-body">
+        <div class="grid">
+          <div class="field full"><label for="bibName">Nama BIB (Nama untuk jersey) <span class="required">*</span></label><input id="bibName" name="bibName" maxlength="18" placeholder="Nama yang ingin dicetak di jersey" required><p class="hint">Maksimal 18 karakter. Periksa ejaan sebelum melanjutkan.</p></div>
+          <div class="field full">
+            <details class="sizechart" open>
+              <summary>Panduan ukuran jersey (size chart)</summary>
+              <div class="sizechart-content">
+                <table class="size-table"><thead><tr><th>Ukuran</th><th>Lebar dada</th><th>Panjang</th></tr></thead><tbody>
+                  <tr><td>XS</td><td>44 cm</td><td>64 cm</td></tr><tr><td>S</td><td>46 cm</td><td>66 cm</td></tr><tr><td>M</td><td>48 cm</td><td>68 cm</td></tr><tr><td>L</td><td>50 cm</td><td>70 cm</td></tr><tr><td>XL</td><td>52 cm</td><td>72 cm</td></tr><tr><td>XXL</td><td>54 cm</td><td>74 cm</td></tr>
+                </tbody></table><p class="hint">Panduan ukuran di atas adalah contoh. Sesuaikan dengan size chart resmi penyelenggara sebelum dipublikasikan.</p>
+              </div>
+            </details>
+          </div>
+          <div class="field"><label for="jerseySize">Ukuran Jersey <span class="required">*</span></label><select id="jerseySize" name="jerseySize" required><option value="">Pilih ukuran</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select></div>
+          <div class="field"><label for="emergencyName">Nama Kontak Darurat <span class="required">*</span></label><input id="emergencyName" name="emergencyName" placeholder="Nama keluarga/kerabat" required></div>
+          <div class="field full"><label for="emergencyPhone">Nomor Kontak Darurat <span class="required">*</span></label><input id="emergencyPhone" name="emergencyPhone" type="tel" placeholder="Nomor yang dapat dihubungi saat darurat" required></div>
+          <div class="field full"><span class="field-label">Apakah Anda memiliki penyakit atau kondisi kesehatan yang perlu diketahui panitia? <span class="required">*</span></span><div class="choice-row">
+            <label class="choice"><input type="radio" name="medicalCondition" value="Ya" required> Ya</label>
+            <label class="choice"><input type="radio" name="medicalCondition" value="Tidak" required> Tidak</label>
+          </div><p class="hint">Informasi ini bersifat pribadi. Isi hanya informasi yang relevan untuk keselamatan Anda saat mengikuti kegiatan.</p></div>
+          <div class="field full" id="medicalDetailsField" hidden><label for="medicalDetails">Informasi kondisi kesehatan (opsional)</label><textarea id="medicalDetails" name="medicalDetails" placeholder="Tuliskan informasi yang perlu diketahui petugas medis"></textarea></div>
+        </div>
+        <div class="actions"><button class="btn btn-secondary" type="button" data-prev>← Kembali</button><button class="btn btn-primary" type="button" data-next>Lanjut ke Ringkasan <span>→</span></button></div>
+      </div>
+    </section>
+
+    <!-- HALAMAN 3 -->
+    <section class="card form-page" data-page="3">
+      <div class="card-head"><h2><span class="number">03</span> Ringkasan & Pembayaran</h2><p>Periksa kembali data peserta, lakukan pembayaran sesuai petunjuk resmi, lalu unggah bukti pembayaran.</p></div>
+      <div class="card-body">
+        <div class="notice">Pastikan semua informasi sudah benar. Total pembayaran di bawah dihitung dari jumlah tiket yang dipilih sebelumnya. Jangan unggah dokumen yang tidak diminta.</div>
+        <div class="summary-list" id="summaryList"></div>
+        <div class="payment-box">
+          <h3>Pembayaran QRIS</h3>
+          <p>Pindai QRIS resmi penyelenggara menggunakan aplikasi pembayaran Anda. Pastikan nama merchant dan jumlah pembayaran sesuai sebelum membayar.</p>
+          <img class="qris-image" src="qris.png" alt="QRIS pembayaran" onerror="this.style.display='none';document.getElementById('qrisMissing').style.display='block'">
+          <div id="qrisMissing" class="notice" style="display:none">File <strong>qris.png</strong> belum ditemukan. Unggah QRIS resmi ke folder yang sama dengan form.html.</div>
+          <div class="total-box"><span>Total bayar</span><strong id="payTotal">Rp 149.000</strong></div>
+          <label class="upload" for="paymentProof"><strong>↑ Upload file bukti pembayaran <span class="required">*</span></strong><small>Format JPG, PNG, atau PDF. Maksimal 5 MB. Pastikan bukti dapat dibaca.</small><input id="paymentProof" name="paymentProof" type="file" accept="image/jpeg,image/png,application/pdf" required><span class="file-name" id="fileName">Belum ada file dipilih</span></label>
+        </div>
+        <div class="consent"><input id="consent" name="consent" type="checkbox" required><label for="consent">Saya menyatakan bahwa data yang saya isi adalah benar, telah memeriksa ringkasan pesanan, dan menyetujui penggunaan data untuk keperluan administrasi pendaftaran serta keselamatan acara. Saya memahami bahwa data pribadi hanya boleh diakses oleh pihak berwenang untuk tujuan tersebut.</label></div>
+        <p class="hint" style="margin-top:12px">Demo antarmuka: halaman statis ini belum mengirim data atau file ke server dan tidak memverifikasi pembayaran. Hubungkan ke backend aman sebelum digunakan untuk pendaftaran nyata.</p>
+        <div class="actions"><button class="btn btn-secondary" type="button" data-prev>← Kembali</button><button class="btn btn-primary" id="registerButton" type="submit">Daftar Sekarang <span>→</span></button></div>
+      </div>
+    </section>
+  </form>
+</main>
+
+<footer class="footer"><div class="footer-inner">
+  <div class="footer-brand"><span>N×</span> NEXURATIX</div>
+  <p>Platform tiket event terpercaya untuk komunitas Indonesia. Temukan, buat, dan rayakan momen terbaikmu.</p>
+  <div class="footer-links"><a href="index.html">Beranda</a><a href="tiket.html">Tiket</a><a href="#">Gallery</a><a href="#">Hubungi Kami</a></div>
+  <div class="copyright">© 2026 Nexuratix — PT Nexa Digital Setya</div>
+</div></footer>
+
+<div class="loading-screen" id="loadingScreen" role="status" aria-live="polite" aria-label="Memproses pendaftaran">
+  <div class="loading-content">
+    <div class="loading-logo">N× &nbsp; NEXURATIX</div>
+    <div class="spinner-wrap"><div class="spinner"></div><div class="spinner-core"></div></div>
+    <h2 id="loadingTitle">Menyiapkan pendaftaran</h2>
+    <p id="loadingText">Mohon tunggu. Jangan tutup atau muat ulang halaman ini selama proses demo berlangsung.</p>
+    <div class="loading-track"><div class="loading-progress" id="loadingProgress"></div></div>
+    <div class="loading-status"><span id="loadingStatus">Memeriksa data formulir…</span><strong id="loadingPercent">0%</strong></div>
+    <div class="loading-note">Mode demo — data belum dikirim ke server.</div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const pages = [...document.querySelectorAll('.form-page')];
+  const progress = document.getElementById('progressBar');
+  const timerEl = document.getElementById('timer');
+  const timerBox = document.getElementById('timerBox');
+  const form = document.getElementById('registrationForm');
+  let currentPage = 1;
+  let remaining = 300;
+  let timerExpired = false;
+  const money = n => 'Rp ' + Number(n).toLocaleString('id-ID');
+
+  function showPage(number) {
+    currentPage = number;
+    pages.forEach(page => page.classList.toggle('active', Number(page.dataset.page) === number));
+    progress.style.width = (number / 3 * 100) + '%';
+    [1,2,3].forEach(i => document.getElementById('stepLabel' + i).classList.toggle('active', i <= number));
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (number === 3) buildSummary();
+  }
+  function validatePage(number) {
+    const page = pages[number - 1];
+    const fields = [...page.querySelectorAll('input,select,textarea')].filter(el => el.type !== 'file' && el.type !== 'checkbox' && el.type !== 'radio');
+    for (const field of fields) {
+      if (!field.checkValidity()) { field.reportValidity(); field.focus(); return false; }
+    }
+    const radios = [...new Set([...page.querySelectorAll('input[type="radio"][required]')].map(r => r.name))];
+    for (const name of radios) {
+      if (!page.querySelector('input[name="' + name + '"]:checked')) {
+        const first = page.querySelector('input[name="' + name + '"]');
+        first.focus(); first.reportValidity(); return false;
+      }
+    }
+    return true;
+  }
+  document.querySelectorAll('[data-next]').forEach(button => button.addEventListener('click', () => {
+    if (timerExpired) { alert('Waktu pengisian 5 menit telah habis. Muat ulang halaman untuk memulai kembali.'); return; }
+    if (validatePage(currentPage)) showPage(Math.min(3, currentPage + 1));
+  }));
+  document.querySelectorAll('[data-prev]').forEach(button => button.addEventListener('click', () => showPage(Math.max(1, currentPage - 1))));
+
+  function updateTimer() {
+    const mins = String(Math.floor(remaining / 60)).padStart(2, '0');
+    const secs = String(remaining % 60).padStart(2, '0');
+    timerEl.textContent = mins + ':' + secs;
+    if (remaining <= 60) timerBox.classList.add('warning');
+    if (remaining <= 0) {
+      timerExpired = true;
+      timerEl.textContent = '00:00';
+      document.querySelectorAll('[data-next],#registerButton').forEach(b => b.disabled = true);
+      document.getElementById('timerBox').innerHTML = '<span>Waktu pengisian habis — muat ulang untuk mulai lagi</span>';
+      return;
+    }
+    remaining--;
+  }
+  updateTimer();
+  const timerInterval = setInterval(() => {
+    updateTimer();
+    if (timerExpired) clearInterval(timerInterval);
+  }, 1000);
+
+  document.querySelectorAll('input[name="medicalCondition"]').forEach(input => input.addEventListener('change', () => {
+    const show = document.querySelector('input[name="medicalCondition"]:checked')?.value === 'Ya';
+    const field = document.getElementById('medicalDetailsField');
+    field.hidden = !show;
+    document.getElementById('medicalDetails').required = false;
+  }));
+
+  document.getElementById('paymentProof').addEventListener('change', event => {
+    const file = event.target.files[0];
+    const label = document.getElementById('fileName');
+    if (!file) { label.textContent = 'Belum ada file dipilih'; return; }
+    const allowed = ['image/jpeg','image/png','application/pdf'];
+    if (!allowed.includes(file.type)) {
+      alert('Pilih file JPG, PNG, atau PDF.');
+      event.target.value = '';
+      label.textContent = 'Belum ada file dipilih';
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      alert('Ukuran file maksimal 5 MB.');
+      event.target.value = '';
+      label.textContent = 'Belum ada file dipilih';
+      return;
+    }
+    label.textContent = 'File dipilih: ' + file.name;
+  });
+
+  function getTicketOrder() {
+    try {
+      const order = JSON.parse(sessionStorage.getItem('nexuratix_order') || '{}');
+      const qty = Math.max(1, Number(order.quantity) || 1);
+      const unit = Math.max(0, Number(order.unitPrice) || 149000);
+      return {quantity:qty, unitPrice:unit, total:qty*unit};
+    } catch(e) { return {quantity:1, unitPrice:149000, total:149000}; }
+  }
+  function val(name) {
+    const checked = form.querySelector('[name="' + name + '"]:checked');
+    const el = form.elements[name];
+    return checked ? checked.value : (el && el.value ? el.value.trim() : '—');
+  }
+  function addSummary(label, value, full=false) {
+    const entry = document.createElement('div');
+    entry.className = 'summary-entry' + (full ? ' full' : '');
+    const key = document.createElement('div'); key.className='key'; key.textContent=label;
+    const valEl = document.createElement('div'); valEl.className='val'; valEl.textContent=(value && String(value).trim()) ? value : '—';
+    entry.append(key,valEl); document.getElementById('summaryList').append(entry);
+  }
+  function buildSummary() {
+    const order = getTicketOrder();
+    document.getElementById('summaryList').innerHTML = '';
+    addSummary('Nama lengkap', val('fullName'));
+    addSummary('Tempat / tanggal lahir', val('birthPlace') + ', ' + val('birthDate'));
+    addSummary('Jenis kelamin', val('gender'));
+    addSummary('Jenis identitas', val('identityType'));
+    addSummary('Nomor identitas', val('identityNumber'));
+    addSummary('No. WhatsApp', val('whatsapp'));
+    addSummary('Email aktif', val('email'));
+    addSummary('Alamat / domisili', val('address'), true);
+    addSummary('Nama BIB', val('bibName'));
+    addSummary('Ukuran jersey', val('jerseySize'));
+    addSummary('Kontak darurat', val('emergencyName') + ' — ' + val('emergencyPhone'), true);
+    addSummary('Informasi kondisi kesehatan', val('medicalCondition') === 'Ya' ? 'Ya' + (val('medicalDetails') !== '—' ? ' — ' + val('medicalDetails') : '') : val('medicalCondition'), true);
+    addSummary('Tiket', 'EARLY BIRD RAVE RUN × ' + order.quantity, true);
+    document.getElementById('payTotal').textContent = money(order.total);
+  }
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (timerExpired) { alert('Waktu pengisian telah habis. Muat ulang halaman untuk memulai kembali.'); return; }
+    if (!validatePage(3)) return;
+    if (!document.getElementById('paymentProof').files.length) {
+      document.getElementById('paymentProof').reportValidity(); return;
+    }
+    if (!document.getElementById('consent').checked) {
+      document.getElementById('consent').reportValidity(); return;
+    }
+    // Demonstration-only flow: static HTML cannot securely transmit or verify the submitted data.
+    const screen = document.getElementById('loadingScreen');
+    screen.classList.add('show');
+    document.body.classList.add('locked');
+    let elapsed = 0;
+    const duration = 180;
+    const statuses = [
+      [0, 'Memeriksa kelengkapan data…'],
+      [20, 'Menyiapkan ringkasan peserta…'],
+      [45, 'Menyiapkan informasi pembayaran…'],
+      [75, 'Menjalankan simulasi pendaftaran…'],
+      [110, 'Merapikan data formulir…'],
+      [145, 'Menyelesaikan proses demo…'],
+      [170, 'Mengalihkan ke halaman sukses…']
+    ];
+    const interval = setInterval(() => {
+      elapsed++;
+      const percent = Math.min(100, Math.round(elapsed / duration * 100));
+      document.getElementById('loadingProgress').style.width = percent + '%';
+      document.getElementById('loadingPercent').textContent = percent + '%';
+      const current = statuses.filter(s => elapsed >= s[0]).at(-1);
+      if (current) document.getElementById('loadingStatus').textContent = current[1];
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        // Data intentionally not persisted or sent from this static demo page.
+        window.location.href = 'success.html';
+      }
+    }, 1000);
+  });
+})();
+</script>
+</body>
+</html>
