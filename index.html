@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f4faf5">
+<title>KAI Pesta LeLARlian 2026</title>
+<style>
+  :root{
+    --ink:#18202b; --muted:#7d8792; --line:#e7ece8; --paper:#fff;
+    --bg:#f5faf6; --green:#eaf6ed; --navy:#06172d;
+    --pink:#fff4f7; --pink-line:#f0dbe2;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--ink); font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:
+      radial-gradient(circle at 12px 12px,rgba(91,145,105,.10) 1px,transparent 1.3px) 0 0/16px 16px,
+      linear-gradient(180deg,#f0f8f1 0%,#f8fbf8 60%,#fff 100%);
+    font-size:14px; line-height:1.55;
+  }
+  .page{width:min(100%,480px);margin:0 auto;padding:12px 11px 0}
+  .hero{overflow:hidden;border-radius:10px;line-height:0;box-shadow:0 2px 8px #1a322010}
+  .hero img{display:block;width:100%;height:auto;object-fit:cover}
+  .card{background:rgba(255,255,255,.96);border:1px solid #e9efeb;border-radius:13px;
+    box-shadow:0 1px 2px rgba(15,35,25,.05);margin-top:19px;padding:18px 17px}
+  h1,h2,h3,p{margin-top:0}
+  .description h2{font-size:15px;line-height:1.3;margin-bottom:14px;font-weight:700}
+  .description p{font-size:11.5px;line-height:1.72;color:#7c8791;margin-bottom:15px}
+  .description p:last-child{margin-bottom:0}
+  .event-title{font-size:13px;font-weight:400;margin:0 0 16px}
+  .details{display:grid;gap:14px}
+  .detail{display:grid;grid-template-columns:28px 1fr;gap:11px;align-items:start}
+  .icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#f2f5f7;color:#1b2530;font-size:15px}
+  .label{font-size:8px;letter-spacing:.07em;color:#a1a9b0;text-transform:uppercase;line-height:1.4}
+  .value{font-size:10.5px;line-height:1.55;color:#252b34}
+  .creator{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:3px}
+  .creator-mark{font-family:Georgia,serif;font-style:italic;font-size:10px;color:#222}
+  .creator-name{font-size:10px}
+  .ticket{padding:17px 17px 18px}
+  .ticket-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+  .eyebrow{font-size:8px;color:#9aa3ac;letter-spacing:.09em;text-transform:uppercase}
+  .price{font-size:14px;line-height:1.4;margin:2px 0 15px}
+  .ticket-symbol{width:28px;height:28px;border-radius:9px;background:#f2f5f7;display:grid;place-items:center;font-size:15px}
+  .buy{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:11px 14px;background:#050505;color:white;border:0;border-radius:8px;text-decoration:none;font-size:10px;font-weight:600;box-shadow:0 4px 8px #0002}
+  .buy span{font-size:17px;font-weight:300;line-height:12px}
+  .partner{text-align:center;font-size:7px;color:#9ca5ac;margin:14px 0 0}
+  .profile{padding:0 0 18px;overflow:hidden}
+  .profile-head{display:flex;gap:12px;align-items:center;padding:0 17px 14px}
+  .logo{width:44px;height:44px;border-radius:50%;border:1px solid #e9ecea;display:grid;place-items:center;flex-shrink:0;background:#fff;font-family:Georgia,serif;font-style:italic;font-size:9px;color:#1c2825}
+  .profile-title{font-size:7px;color:#9ca5ac;letter-spacing:.08em;text-transform:uppercase}
+  .profile-name{font-size:12px;line-height:1.4}
+  .profile-body{padding:0 22px}
+  .profile-body p{font-size:10.5px;line-height:1.7;color:#7b8690;margin:0 0 10px}
+  .location-note{font-size:9px;color:#87919a;font-style:italic;margin:0 0 23px}
+  .social-label{text-align:center;font-size:8px;letter-spacing:.08em;color:#9ca5ac;text-transform:uppercase;margin-bottom:12px}
+  .social{text-align:center}
+  .social a{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:10px;border:1px solid var(--pink-line);background:var(--pink);color:#b26c82;text-decoration:none;font-size:9px;box-shadow:0 2px 4px #00000008}
+  footer{margin:32px -11px 0;padding:25px 17px 28px;color:#c0c8d0;background:
+    radial-gradient(ellipse at 15% 55%,#15385a 0%,transparent 42%),
+    linear-gradient(135deg,#020b17,#071a2e 60%,#020810);border-radius:0;min-height:420px}
+  .brand{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.23em;color:#fff;font-weight:700;margin-bottom:12px}
+  .brand-mark{font-size:15px;letter-spacing:-.15em;font-weight:900;color:#fff}
+  .footer-intro{font-size:9px;line-height:1.7;color:#8d9ba9;max-width:280px;margin-bottom:22px}
+  .footer-social{display:flex;gap:9px;margin-bottom:27px}
+  .footer-social a{width:27px;height:27px;display:grid;place-items:center;border:1px solid #ffffff20;border-radius:50%;color:#b8c4cf;text-decoration:none;font-size:12px}
+  .footer-columns{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:27px}
+  .footer-heading{font-size:7px;letter-spacing:.2em;color:#8b9aaa;margin-bottom:12px}
+  .footer-links{display:grid;gap:9px}
+  .footer-links a{color:#aab6c2;text-decoration:none;font-size:9px}
+  .contact{margin-top:13px;padding:13px 12px;border:1px solid #ffffff18;border-radius:12px;background:#ffffff08;display:grid;gap:13px}
+  .contact-row{display:grid;grid-template-columns:25px 1fr;gap:9px;align-items:center;font-size:9px;color:#b5c0ca}
+  .contact-icon{width:25px;height:25px;border:1px solid #ffffff18;border-radius:7px;display:grid;place-items:center;font-size:12px}
+  .contact small{font-size:8px;color:#b5c0ca}
+  @media(min-width:600px){
+    body{padding-top:24px;padding-bottom:24px}
+    .page{padding:0 18px;width:min(100%,520px)}
+    footer{margin-left:-18px;margin-right:-18px;border-radius:0 0 16px 16px}
+    .hero{border-radius:12px}
+    .card{padding:23px 22px;margin-top:22px;border-radius:15px}
+    .description p,.profile-body p{font-size:12px}
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="hero">
+    <img src="banner.png" alt="KAI Access — Pesta LeLARlian Cirebon 2026">
+  </div>
+
+  <section class="card description">
+    <h2>Deskripsi</h2>
+    <p>Acara ini terbentuk dalam rangka rasa syukur atas berdirinya KAI selama 81 tahun. Acara ini juga merupakan bentuk apresiasi KAI Daop 3 Cirebon kepada masyarakat Cirebon dan kota-kota lainnya dengan menghadirkan hiburan sehat yang ditujukan bagi para pelanggan setia KAI, khususnya warga Cirebon. Acara ini tentunya juga akan memberikan dampak positif bagi sektor pariwisata di Kota Cirebon.</p>
+    <p>Pesta LeLARlian hadir sebagai wadah yang menggabungkan olahraga, hiburan, dan kebersamaan dalam satu pengalaman. Mengusung tema besar BERLARI, BERPESTA DAN BERBAHAGIA!, kami ingin mengajak masyarakat untuk menikmati aktivitas berlari dengan suasana yang lebih santai, menyenangkan, dan inklusif, sehingga berlari tidak hanya menjadi olahraga, tetapi juga menjadi momen untuk bercengkrama, bersenang-senang, dan merayakan kebersamaan.</p>
+  </section>
+
+  <section class="card event">
+    <h2 class="event-title">KAI Pesta LeLARlian 2026</h2>
+    <div class="details">
+      <div class="detail">
+        <div class="icon" aria-hidden="true">▦</div>
+        <div><div class="label">Tanggal</div><div class="value">2026-11-29</div></div>
+      </div>
+      <div class="detail">
+        <div class="icon" aria-hidden="true">◷</div>
+        <div><div class="label">Waktu</div><div class="value">05:30 WIB</div></div>
+      </div>
+      <div class="detail">
+        <div class="icon" aria-hidden="true">♧</div>
+        <div><div class="label">Lokasi</div><div class="value">Jl. Siliwangi No.84, Kebonbaru,<br>Kec. Kejaksan, Kota Cirebon, Jawa<br>Barat 45121, Cirebon, Jawa Barat</div></div>
+      </div>
+    </div>
+    <div class="creator">
+      <div class="creator-mark">Safari</div>
+      <div><div class="label">Creator</div><div class="creator-name">Safari Sarana Kreatif</div></div>
+    </div>
+  </section>
+
+  <section class="card ticket">
+    <div class="ticket-top">
+      <div><div class="eyebrow">Ticket start from</div><div class="price">Rp 149.000</div></div>
+      <div class="ticket-symbol" aria-hidden="true">⚿</div>
+    </div>
+    <a class="buy" href="#" onclick="alert('Silakan hubungkan tombol ini ke halaman pembelian tiket.');return false;">Beli Tiket <span>›</span></a>
+    <div class="partner">Official Partner By Nexuratix</div>
+  </section>
+
+  <section class="card profile">
+    <div class="profile-head">
+      <div class="logo">Safari<br>SK</div>
+      <div><div class="profile-title">Profil Kreator</div><div class="profile-name">Safari Sarana Kreatif</div></div>
+    </div>
+    <div class="profile-body">
+      <p>Sebuah tim profesional di bidang Event Production, Show Management, dan Visual Design. Layanan kami dirancang untuk menyatukan kreativitas dan aspek teknis produksi dalam satu kesatuan. Kami mengelola seluruh tahapan produksi acara, mulai dari perancangan konsep, penyusunan alur pertunjukan, pengelolaan teknis, hingga produksi visual. Dengan pendekatan ini, setiap event yang kami tangani memiliki struktur pertunjukan yang kuat dan menghadirkan pengalaman audiens yang menarik.</p>
+      <div class="location-note">♧ &nbsp; Tangerang</div>
+      <div class="social-label">Social Media</div>
+      <div class="social"><a href="#" onclick="return false;" aria-label="Instagram">◎ &nbsp; Instagram</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="brand"><span class="brand-mark">N×</span> NEXURATIX</div>
+    <p class="footer-intro">Platform tiket event terpercaya untuk komunitas Indonesia. Temukan, buat, dan rayakan momen terbaikmu.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram" onclick="return false;">◎</a>
+      <a href="#" aria-label="WhatsApp" onclick="return false;">◌</a>
+    </div>
+    <div class="footer-columns">
+      <div>
+        <div class="footer-heading">PLATFORM</div>
+        <div class="footer-links">
+          <a href="#">Beranda</a><a href="#">Gallery</a><a href="#">Validasi Tiket</a><a href="#">Game 🎮</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">KREATOR</div>
+        <div class="footer-links">
+          <a href="#">Jadi Kreator</a><a href="#">Daftar Kreator</a><a href="#">Dashboard Kreator</a><a href="#">Manual Book Creator</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-heading">HUBUNGI KAMI</div>
+    <div class="contact">
+      <div class="contact-row"><span class="contact-icon">✉</span><span>support@nexuratix.com</span></div>
+      <div class="contact-row"><span class="contact-icon">♧</span><span>+62 851-2334-0467</span></div>
+      <div class="contact-row"><span class="contact-icon">⌖</span><span>CFX Tower, Jl. Gatot Subroto<br>Jakarta Selatan, 12850</span></div>
+    </div>
+  </footer>
+</main>
+</body>
+</html>
