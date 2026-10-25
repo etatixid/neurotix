@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>Pilih Tiket — KAI Pesta LeLARlian 2026</title>
+<style>
+:root{
+  --black:#050505;--ink:#141d2d;--muted:#66758b;--pale:#cbd5e1;
+  --bg:#f7f9fc;--line:#e9edf3;--blue:#2785f7;--card:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:inherit}
+.topbar{height:114px;background:#000;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 max(32px,calc((100vw - 1120px)/2));gap:18px;border-bottom:3px solid #d9dde4}
+.brand{font-size:26px;font-weight:900;letter-spacing:-3px;color:#fff;text-decoration:none;white-space:nowrap}
+.top-actions{display:flex;align-items:center;gap:20px}
+.language{display:flex;align-items:center;gap:12px;padding:14px 18px;border:2px solid #252525;border-radius:13px;background:#0c0c0c;font-size:21px;font-weight:800;letter-spacing:2px;white-space:nowrap}
+.language .id{color:#c9ed19}.language .en{color:#555}.language .slash{color:#555;font-size:25px}
+.login{display:inline-flex;align-items:center;justify-content:center;background:var(--blue);color:#fff;text-decoration:none;border-radius:13px;padding:18px 38px;min-width:175px;font-weight:800;letter-spacing:4px;font-size:22px;box-shadow:0 5px 10px #1682ff33}
+main{max-width:1120px;margin:0 auto;padding:44px 32px 32px}
+.back{display:flex;align-items:center;gap:16px;color:#64748b;text-decoration:none;font-size:28px;font-weight:700;margin:0 0 34px}
+.back-icon{width:64px;height:64px;border:2px solid #e2e8f0;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:36px;font-weight:400;flex-shrink:0}
+.event-card,.panel{background:var(--card);border:1px solid #edf0f5;border-radius:32px;box-shadow:0 2px 5px #0f172a18,0 0 8px #0f172a04;overflow:hidden}
+.event-card{padding:32px;display:flex;gap:32px;align-items:center;margin-bottom:32px}
+.event-thumb{width:128px;height:128px;border-radius:24px;flex-shrink:0;object-fit:cover;background:#063b82}
+.event-info{min-width:0;flex:1}
+.event-info h1{font-size:28px;line-height:1.3;margin:0 0 14px;font-weight:750;white-space:normal}
+.event-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 30px;color:#64748b;font-size:23px}
+.meta-item{display:flex;align-items:center;gap:12px;min-width:0}
+.meta-item svg{width:22px;height:22px;stroke:#263548;flex-shrink:0}
+.location{display:block;white-space:nowrap;overflow:hidden;text-overflow:clip;max-width:100%;margin-top:10px}
+.panel{margin-bottom:40px}
+.panel-head{display:flex;align-items:center;gap:17px;padding:32px 40px;border-bottom:1px solid var(--line);background:#fbfcfe;font-size:28px;font-weight:750}
+.panel-head svg{width:31px;height:31px;stroke:#050505;flex-shrink:0}
+.ticket-row{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:30px 32px}
+.ticket-name{font-size:27px;line-height:1.55;font-weight:650}
+.ticket-price{font-size:27px;font-weight:750}
+.quantity{display:flex;align-items:center;gap:26px;flex-shrink:0}
+.quantity button{border:0;cursor:pointer;font-family:inherit}
+.qty-minus{font-size:32px;color:#dfe6ee;background:transparent;padding:10px}
+.qty-value{min-width:22px;text-align:center;color:#cbd5e1;font-size:28px;font-weight:750}
+.qty-plus{width:64px;height:64px;border-radius:16px;background:#000;color:#fff;font-size:35px;line-height:1;box-shadow:0 3px 6px #0003}
+.summary-body{padding:55px 40px 40px;text-align:center}
+.empty{font-size:27px;color:#94a3b8;margin:0 0 48px}
+.summary-items{display:none;text-align:left;margin:-10px 0 28px}
+.summary-item{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:19px}
+.total{display:none;justify-content:space-between;font-weight:750;font-size:22px;padding:12px 0 28px}
+.checkout{width:100%;min-height:96px;border:0;border-radius:24px;background:#f0f4f9;color:#cbd5e1;font:750 27px inherit;font-size:27px;font-weight:750;display:flex;align-items:center;justify-content:center;gap:18px;cursor:not-allowed}
+.checkout svg{width:28px;height:28px;stroke:currentColor}
+.checkout.enabled{background:#050505;color:#fff;cursor:pointer;box-shadow:0 5px 10px #0002}
+.footer{background:
+  radial-gradient(ellipse at 26% 44%,rgba(0,104,119,.36),transparent 42%),
+  radial-gradient(ellipse at 65% 65%,rgba(0,99,58,.44),transparent 45%),
+  linear-gradient(135deg,#080b0e,#0b1115 55%,#030504);
+  color:#9aa5a9;padding:78px max(48px,calc((100vw - 1120px)/2)) 42px}
+.footer-inner{max-width:1120px;margin:0 auto}
+.footer-brand{display:flex;align-items:center;gap:27px;color:#f5f7f8;font-size:34px;letter-spacing:7px;font-weight:750;margin-bottom:44px}
+.footer-brand-mark{font-size:32px;font-weight:900;letter-spacing:-5px}
+.footer-intro{font-size:28px;line-height:1.65;max-width:900px;margin:0 0 48px;color:#7f898d}
+.footer-social{display:flex;gap:22px;margin-bottom:80px}
+.footer-social a{width:80px;height:80px;border:2px solid #ffffff18;border-radius:50%;display:grid;place-items:center;color:#aeb9bd;text-decoration:none}
+.footer-social svg{width:33px;height:33px;stroke:currentColor}
+.footer-columns{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-bottom:86px}
+.footer-heading{font-size:18px;font-weight:850;letter-spacing:6px;color:#677477;margin-bottom:40px}
+.footer-links{display:grid;gap:32px}
+.footer-links a{font-size:27px;line-height:1.5;text-decoration:none;color:#a2acad}
+.footer-links a:hover{color:#fff}
+.contact-wrap .footer-heading{margin-bottom:38px}
+.contact{border:2px solid #ffffff1a;background:#ffffff08;border-radius:34px;padding:40px;display:grid;gap:30px}
+.contact-row{display:grid;grid-template-columns:72px 1fr;gap:24px;align-items:center;font-size:27px;line-height:1.6;color:#a4adaf;overflow-wrap:anywhere}
+.contact-icon{width:72px;height:72px;border:2px solid #ffffff20;border-radius:22px;display:grid;place-items:center}
+.contact-icon svg{width:32px;height:32px;stroke:#aab4b6}
+.copyright{border-top:2px solid #ffffff12;margin-top:96px;padding-top:55px;text-align:center;font-size:22px;color:#555e61}
+.bottom-nav{display:none}
+@media(max-width:650px){
+  .topbar{height:114px;padding:0 32px;gap:12px}
+  .brand{font-size:24px}
+  .top-actions{gap:12px}
+  .language{padding:13px 14px;font-size:18px;gap:8px;letter-spacing:1px}
+  .login{min-width:0;padding:18px 24px;font-size:18px;letter-spacing:3px}
+  main{padding:44px 32px 0}
+  .back{font-size:28px;margin-bottom:34px;gap:16px}
+  .event-card{padding:32px;gap:32px;border-radius:32px;margin-bottom:32px}
+  .event-thumb{width:128px;height:128px;border-radius:24px}
+  .event-info h1{font-size:27px}
+  .event-meta{font-size:22px;gap:12px 28px}
+  .meta-item{gap:12px}
+  .location{max-width:calc(100vw - 285px)}
+  .panel{border-radius:32px;margin-bottom:40px}
+  .panel-head{font-size:28px;padding:32px 40px;gap:17px}
+  .ticket-row{padding:30px 32px;gap:10px}
+  .ticket-name,.ticket-price{font-size:27px}
+  .quantity{gap:22px}
+  .qty-plus{width:64px;height:64px}
+  .summary-body{padding:55px 40px 40px}
+  .empty{font-size:27px;margin-bottom:48px}
+  .checkout{min-height:96px;border-radius:24px;font-size:27px}
+  .footer{padding:78px 48px 42px}
+  .footer-brand{font-size:34px;gap:27px;letter-spacing:7px;margin-bottom:44px}
+  .footer-intro{font-size:28px;line-height:1.65;margin-bottom:48px}
+  .footer-social{gap:22px;margin-bottom:80px}
+  .footer-social a{width:80px;height:80px}
+  .footer-columns{gap:40px;margin-bottom:86px}
+  .footer-heading{font-size:18px;letter-spacing:6px;margin-bottom:40px}
+  .footer-links{gap:32px}
+  .footer-links a{font-size:27px}
+  .contact{padding:40px;gap:30px;border-radius:34px}
+  .contact-row{grid-template-columns:72px 1fr;gap:24px;font-size:27px}
+  .contact-icon{width:72px;height:72px;border-radius:22px}
+  .copyright{font-size:22px;margin-top:96px;padding-top:55px}
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:94px;background:#000;color:#656565;display:grid;grid-template-columns:repeat(4,1fr);z-index:10;border-top:1px solid #222}
+  .bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;text-decoration:none;font-size:16px;color:#666}
+  .bottom-nav svg{width:30px;height:30px;stroke:currentColor}
+  body{padding-bottom:94px}
+}
+@media(max-width:390px){
+  .topbar{padding:0 16px}
+  .language{font-size:14px;padding:10px 9px}
+  .login{font-size:14px;padding:15px 16px}
+  main{padding-left:16px;padding-right:16px}
+  .event-card{padding:18px;gap:14px}
+  .event-thumb{width:88px;height:88px;border-radius:16px}
+  .event-info h1{font-size:18px}
+  .event-meta{font-size:14px;gap:8px}
+  .meta-item{gap:7px}
+  .meta-item svg{width:17px;height:17px}
+  .location{max-width:calc(100vw - 160px)}
+  .panel-head{padding:22px;font-size:20px}
+  .ticket-row{padding:22px 18px}
+  .ticket-name,.ticket-price{font-size:19px}
+  .quantity{gap:8px}
+  .qty-plus{width:48px;height:48px;border-radius:12px}
+  .summary-body{padding:32px 22px}
+  .empty{font-size:18px}
+  .checkout{min-height:64px;font-size:17px;border-radius:16px}
+  .footer{padding:48px 24px 30px}
+  .footer-brand{font-size:21px;letter-spacing:4px;gap:16px;margin-bottom:25px}
+  .footer-brand-mark{font-size:24px}
+  .footer-intro{font-size:17px;margin-bottom:28px}
+  .footer-social{margin-bottom:48px}
+  .footer-social a{width:52px;height:52px}
+  .footer-columns{gap:22px;margin-bottom:48px}
+  .footer-heading{font-size:11px;letter-spacing:3px;margin-bottom:22px}
+  .footer-links{gap:18px}
+  .footer-links a{font-size:16px}
+  .contact{padding:20px;gap:18px;border-radius:22px}
+  .contact-row{grid-template-columns:46px 1fr;gap:12px;font-size:15px}
+  .contact-icon{width:46px;height:46px;border-radius:14px}
+  .copyright{font-size:13px;margin-top:52px;padding-top:30px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html" class="brand" aria-label="Nexuratix">N×</a>
+  <div class="top-actions">
+    <div class="language" aria-label="Pilih bahasa"><span>🇮🇩</span><span class="id">ID</span><span class="slash">/</span><span>🇬🇧</span><span class="en">EN</span></div>
+    <a href="#" class="login" onclick="return false;">MASUK</a>
+  </div>
+</header>
+
+<main>
+  <a class="back" href="index.html">
+    <span class="back-icon" aria-hidden="true">‹</span>
+    <span>Kembali ke Detail Event</span>
+  </a>
+
+  <section class="event-card" aria-label="Detail acara">
+    <img class="event-thumb" src="banner.png" alt="Banner KAI Pesta LeLARlian 2026">
+    <div class="event-info">
+      <h1>KAI Pesta LeLARlian 2026</h1>
+      <div class="event-meta">
+        <span class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+          <span>2026-11-29</span>
+        </span>
+        <span class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>05:30 WIB</span>
+        </span>
+      </div>
+      <span class="meta-item location">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <span>Jl. Siliwangi No.84, Kebonbaru, Kec. Kejaksan, Kota Cirebon, Jawa Barat</span>
+      </span>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Pilih tiket">
+    <div class="panel-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6V6a1 1 0 0 1 1-1Z"/><path d="M12 7v2m0 2v2m0 2v2"/></svg>
+      <span>Pilih Tiket Anda</span>
+    </div>
+    <div class="ticket-row">
+      <div>
+        <div class="ticket-name">EARLY BIRD RAVE RUN</div>
+        <div class="ticket-price">Rp 149.000</div>
+      </div>
+      <div class="quantity" aria-label="Jumlah tiket">
+        <button class="qty-minus" id="minus" type="button" aria-label="Kurangi tiket" disabled>−</button>
+        <span class="qty-value" id="quantity" aria-live="polite">0</span>
+        <button class="qty-plus" id="plus" type="button" aria-label="Tambah tiket">+</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Ringkasan pesanan">
+    <div class="panel-head">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M4 8h16l-1 13H5L4 8Z"/><path d="M9 11a3 3 0 0 0 6 0"/></svg>
+      <span>Ringkasan Pesanan</span>
+    </div>
+    <div class="summary-body">
+      <p class="empty" id="empty">Belum ada tiket dipilih</p>
+      <div class="summary-items" id="summaryItems">
+        <div class="summary-item"><span>EARLY BIRD RAVE RUN × <span id="summaryQty">1</span></span><strong id="subtotal">Rp 149.000</strong></div>
+      </div>
+      <div class="total" id="total"><span>Total</span><span id="totalPrice">Rp 149.000</span></div>
+      <button class="checkout" id="checkout" type="button" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><path d="M4 8h16l-1 13H5L4 8Z"/><path d="M9 11a3 3 0 0 0 6 0"/></svg>
+        <span>Lanjut Pembayaran</span>
+      </button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><span class="footer-brand-mark">N×</span><span>NEXURATIX</span></div>
+    <p class="footer-intro">Platform tiket event terpercaya untuk komunitas Indonesia. Temukan, buat, dan rayakan momen terbaikmu.</p>
+    <div class="footer-social">
+      <a href="#" aria-label="Instagram" onclick="return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".7" fill="currentColor"/></svg></a>
+      <a href="#" aria-label="WhatsApp" onclick="return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 11.5a8 8 0 0 1-11.8 7L4 20l1.5-4A8 8 0 1 1 20 11.5Z"/><path d="M9 9c1 3 2 4 5 5"/></svg></a>
+    </div>
+    <div class="footer-columns">
+      <div>
+        <div class="footer-heading">PLATFORM</div>
+        <div class="footer-links"><a href="index.html">Beranda</a><a href="#">Gallery</a><a href="#">Validasi Tiket</a><a href="#">Game 🎮</a></div>
+      </div>
+      <div>
+        <div class="footer-heading">KREATOR</div>
+        <div class="footer-links"><a href="#">Jadi Kreator</a><a href="#">Daftar Creator</a><a href="#">Dashboard Creator</a><a href="#">Manual Book<br>Creator</a></div>
+      </div>
+    </div>
+    <div class="contact-wrap">
+      <div class="footer-heading">HUBUNGI KAMI</div>
+      <div class="contact">
+        <div class="contact-row"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span>support@nexuratix.com</span></div>
+        <div class="contact-row"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M5 3h4l2 5-3 2a15 15 0 0 0 6 6l2-3 5 2v4c0 1-1 2-2 2C10 20 4 14 3 5c0-1 1-2 2-2Z"/></svg></span><span>+62 851-2334-0467</span></div>
+        <div class="contact-row"><span class="contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span>CFX Tower, Jl. Gatot Subroto<br>Jakarta Selatan, 12950</span></div>
+      </div>
+    </div>
+    <div class="copyright">© 2026 Nexuratix — PT Nexa Digital Setya</div>
+  </div>
+</footer>
+
+<nav class="bottom-nav" aria-label="Navigasi bawah">
+  <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1Z"/></svg><span>Beranda</span></a>
+  <a href="#"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Gallery</span></a>
+  <a href="tiket.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 5h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6V6a1 1 0 0 1 1-1Z"/><path d="M12 7v2m0 2v2m0 2v2"/></svg><span>Tiket</span></a>
+  <a href="#" onclick="return false;"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2"/></svg><span>Masuk</span></a>
+</nav>
+
+<script>
+(() => {
+  const price = 149000;
+  let quantity = 0;
+  const qty = document.getElementById('quantity');
+  const minus = document.getElementById('minus');
+  const plus = document.getElementById('plus');
+  const empty = document.getElementById('empty');
+  const items = document.getElementById('summaryItems');
+  const summaryQty = document.getElementById('summaryQty');
+  const subtotal = document.getElementById('subtotal');
+  const total = document.getElementById('total');
+  const totalPrice = document.getElementById('totalPrice');
+  const checkout = document.getElementById('checkout');
+  const format = value => 'Rp ' + value.toLocaleString('id-ID');
+
+  function render(){
+    qty.textContent = quantity;
+    minus.disabled = quantity === 0;
+    minus.style.color = quantity === 0 ? '#dfe6ee' : '#64748b';
+    empty.style.display = quantity === 0 ? 'block' : 'none';
+    items.style.display = quantity === 0 ? 'none' : 'block';
+    total.style.display = quantity === 0 ? 'none' : 'flex';
+    summaryQty.textContent = quantity;
+    subtotal.textContent = format(quantity * price);
+    totalPrice.textContent = format(quantity * price);
+    checkout.disabled = quantity === 0;
+    checkout.classList.toggle('enabled', quantity > 0);
+  }
+  plus.addEventListener('click', () => { if(quantity < 10) quantity++; render(); });
+  minus.addEventListener('click', () => { if(quantity > 0) quantity--; render(); });
+  checkout.addEventListener('click', () => {
+    if(quantity < 1) return;
+    const order = {event:'KAI Pesta LeLARlian 2026', ticket:'EARLY BIRD RAVE RUN', quantity, unitPrice:price, total:quantity*price};
+    try { sessionStorage.setItem('nexuratix_order', JSON.stringify(order)); } catch(e) {}
+    window.location.href = 'form.html';
+  });
+  render();
+})();
+</script>
+</body>
+</html>
